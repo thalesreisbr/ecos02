@@ -1,33 +1,40 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('administradores', {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.createTable('user', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ativo:{
-        type: Sequelize.BOOLEAN,
-        allowNull:true,
-        default:true
-      },
-      nome: {
+      name: {
+        allowNull: true,
         type: Sequelize.STRING,
-        allowNull: false
       },
       email: {
-        type: Sequelize.STRING,
+        allowNull: true,
         unique: true,
-        allowNull: false
-      },
-      senha: {
         type: Sequelize.STRING,
-        allowNull: false
       },
-      refresh_token: {
+      password: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      document: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      gender: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      birth_date: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      token: {
         allowNull: true,
         type: Sequelize.STRING,
       },
@@ -42,14 +49,21 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      address_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: { model: 'address', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       created_at: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
       updated_at: {
         allowNull: true,
         type: Sequelize.DATE,
-        
       },
       deleted_at: {
         allowNull: true,
@@ -57,10 +71,11 @@ module.exports = {
       },
     });
 
+    
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('administradores');
+    return queryInterface.dropTable('user');
 
   }
 };

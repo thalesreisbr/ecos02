@@ -5,12 +5,12 @@ module.exports = {
     return queryInterface.bulkInsert('perfis', [
       {
         id:1,
-        ativo:true,
+        active:true,
         perfil:"GERENTE"
       },
       {
         id:2,
-        ativo:true,
+        active:true,
         perfil:"OPERADOR"
         },
       

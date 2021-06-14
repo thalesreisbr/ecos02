@@ -1,7 +1,11 @@
+/* /* Data Access Object <exemplo>
+ * B2ML Sistemas
+ * Dev:  
+ * Desc.: Camada de persistencia da entidade "exemplo"
+ */
 
-const status = require("http-status");
+const status = 	require("http-status");
 const database = require("../config/database");
-const entity =  require("../models/Perfil")
 
 //Adiciona uma nova instancia da entidade.
 exports.adicionar = async (body) => {

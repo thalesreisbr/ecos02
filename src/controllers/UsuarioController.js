@@ -6,13 +6,12 @@ const {getPrivateKey,getRecoveryKey} = require("../config/keys");
 const DAO = require('../services/UsuarioDAO');
 const mailer= require('../utils/Mailer');
 const {cpf} = require('cpf-cnpj-validator');
-const exposicao = require("../models/exposicao");
 
 
 exports.cadastrarSemLogin = async (request, response, next) => {
 	const credenciais = request.body;
     //Verifica se os dados de cadastro estão completos
-	if (!credenciais || !credenciais.nome || !credenciais.email || !credenciais.senha)
+	if (!credenciais || !credenciais.name || !credenciais.email || !credenciais.password)
         return response.status(status.BAD_REQUEST).send({msg: 'Dados insuficientes.'});
     if(await DAO.buscarPeloEmail(credenciais.email)){
         return response.status(status.CONFLICT).send({msg: 'Email já existente.'});

@@ -5,15 +5,15 @@ module.exports = {
     const salt = await bcrypt.genSalt();
     let senha = "senha123";
     senha =  await bcrypt.hash(senha, salt);
-    return queryInterface.bulkInsert('usuarios', [
+    return queryInterface.bulkInsert('user', [
       {
-        "nome":"thales",
+        "name":"thales",
         "email":"thale@gmail.com.br",
-        "senha":senha,
-        "cpf":"13373085608",
-        "sexo":"male",
-        "data_de_nascimento":"1990-05-07",
-        "endereco_id":2,
+        "password":senha,
+        "document":"13373085608",
+        "gender":"male",
+        "birth_date":"1990-05-07",
+        "perfil_id":1,
         "created_at": new Date()
       },
 
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('usuarios', null, {});
+    return queryInterface.bulkDelete('user', null, {});
 
   }
 };

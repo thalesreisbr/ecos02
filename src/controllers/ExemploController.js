@@ -1,5 +1,5 @@
 const status = require("http-status");
-const DAO = require('../services/ExemploDAO');
+//const DAO = require('../services/ExemploDAO');
 
 //Adiciona uma nova instancia da entidade.
 exports.adicionar = async (request, response, next) => {

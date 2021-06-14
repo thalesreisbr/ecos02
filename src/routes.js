@@ -1,15 +1,11 @@
 const express = require("express");
 const routes = express.Router();
 const { AUTH,ADM,REFRESH, RECOVERY } = require('./middlewares/Autorizacao');
-const {ACCESS_TOKEN} = require('./middlewares/ApiHotmartAutorizacao')
 const {UPLOAD} = require('./middlewares/UploadFiles');
 const Exemplo = require("./controllers/ExemploController");
 const Usuario = require('./controllers/UsuarioController');
 const Perfil = require('./controllers/PerfilController');
 const Status = require('./controllers/StatusController');;
-
-
-routes.get("/api/home/", Home.buscarUm);
 
 
 

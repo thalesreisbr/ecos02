@@ -1,7 +1,5 @@
 const status = require("http-status");
 const database = require("../config/database");
-const IniciarModels = require("../models/init-models");
-const { status: entity } = IniciarModels(database);
 
 //Adiciona uma nova instancia da entidade.
 exports.adicionar = async (body) => {

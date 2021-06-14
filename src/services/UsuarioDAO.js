@@ -1,8 +1,7 @@
 const status = require("http-status");
 const { Op } = require("sequelize");
 const database = require("../config/database");
-const IniciarModels = require("../models/init-models");
-const { usuarios: entity, enderecos:enderecos } = IniciarModels(database);
+const entity = require("../models/User");
 
 //Adiciona uma nova instancia da entidade.
 exports.cadastrar = async (credenciais) => {

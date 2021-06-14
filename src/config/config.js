@@ -5,7 +5,7 @@ const config = {
     "port": 5432,
     "host": "localhost",
     "schema": "public",
-    "database": "gizeleMonteiro",
+    "database": "user",
     "username": "postgres",
     "password": "postgres",
     "define": {
