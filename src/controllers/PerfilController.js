@@ -2,7 +2,7 @@ const status = require("http-status");
 const DAO = require('../services/PerfilDAO');
 
 //Adiciona uma nova instancia da entidade.
-exports.adicionar = async (request, response, next) => {
+exports.add = async (request, response, next) => {
 	try {
 
 		const instancia = await DAO.adicionar(request.body);
@@ -14,7 +14,7 @@ exports.adicionar = async (request, response, next) => {
 };
 
 //Busca por uma instancia da entidade.
-exports.buscarUm = async (request, response, next) => {
+exports.findOne = async (request, response, next) => {
 	try {
 
 		const instancia = await DAO.buscarUm(request.params.id)
@@ -26,7 +26,7 @@ exports.buscarUm = async (request, response, next) => {
 };
 
 //Busca todas as instancias da entidade.
-exports.buscarTudo = async (request, response, next) => {
+exports.findAll = async (request, response, next) => {
 	let { limite, pagina } = request.query;
 
 	try {
@@ -39,7 +39,7 @@ exports.buscarTudo = async (request, response, next) => {
 };
 
 //Busca todas as instancias da entidade sem paginação.
-exports.buscarTudoSemPaginacao = async (request, response, next) => {
+exports.findAllWithoutPagination = async (request, response, next) => {
 	try {
 
 		const instancias = await DAO.buscarTudoSemPaginacao();
@@ -51,7 +51,7 @@ exports.buscarTudoSemPaginacao = async (request, response, next) => {
 };
 
 //Atualiza uma instancia da entidade.
-exports.atualizar = async (request, response, next) => {
+exports.refresh = async (request, response, next) => {
 	try {
 
 		const updated_id = await DAO.atualizar(request.params.id, request.body)
@@ -63,7 +63,7 @@ exports.atualizar = async (request, response, next) => {
 };
 
 //Exclui uma instancia da entidade.
-exports.excluir = async (request, response, next) => {
+exports.delete = async (request, response, next) => {
 	try {
 
 		const deleted_id = await DAO.excluir(request.params.id)

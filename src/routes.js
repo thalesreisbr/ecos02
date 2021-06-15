@@ -8,33 +8,33 @@ const Perfil = require('./controllers/PerfilController');
 const Status = require('./controllers/StatusController');;
 
 //Rotas para o controlador exemplo
-routes.post("/api/ex", Exemplo.adicionar);
-routes.get("/api/ex/:id", Exemplo.buscarUm);
-routes.get("/api/ex", Exemplo.buscarTudo);
-routes.get("/api/ex", Exemplo.buscarTudoSemPaginacao);
-routes.put("/api/ex/:id", Exemplo.atualizar);
-routes.delete("/api/ex/:id", Exemplo.excluir);
+routes.post("/api/ex", Exemplo.add);
+routes.get("/api/ex/:id", Exemplo.findOne);
+routes.get("/api/ex", Exemplo.findAll);
+routes.get("/api/ex", Exemplo.findAllWithoutPagination);
+routes.put("/api/ex/:id", Exemplo.refresh);
+routes.delete("/api/ex/:id", Exemplo.delete);
 
-routes.get("/api/perfil/:id", Perfil.buscarUm);
-routes.get("/api/perfil", Perfil.buscarTudoSemPaginacao);
-
-
-routes.get("/api/status/:id", Status.buscarUm);
-routes.get("/api/status", Status.buscarTudoSemPaginacao);
+routes.get("/api/perfil/:id", Perfil.findOne);
+routes.get("/api/perfil", Perfil.findAllWithoutPagination);
 
 
-routes.post("/api/usuario/cadastro_sem_login", Usuario.cadastrarSemLogin);
-routes.post("/api/usuario/", Usuario.cadastrar);
-routes.post("/api/usuario/login",REFRESH, Usuario.autenticar);
-routes.post("/api/usuario/recuperar_senha", Usuario.recuperarSenha);
-routes.post("/api/usuario/redefinir_renha",RECOVERY, Usuario.redefinirSenha);
-routes.get("/api/usuario/all", Usuario.buscarTudoSemPaginacao);
-routes.get("/api/usuario/email", Usuario.buscarPeloEmail);
-routes.get("/api/usuario/:id",AUTH, Usuario.buscarUm);
-routes.get("/api/usuario", Usuario.buscarTudo);
-routes.put("/api/usuario/:id",AUTH, Usuario.atualizar);
-routes.delete("/api/usuario/:id", Usuario.excluir);
-routes.delete("/api/usuario/parcialmente/:id", Usuario.excluirParcialmente);
+routes.get("/api/status/:id", Status.findOne);
+routes.get("/api/status", Status.findAllWithoutPagination);
+
+
+routes.post("/api/usuario/cadastro_sem_login", Usuario.registerWithoutLogin);
+routes.post("/api/usuario/", Usuario.register);
+routes.post("/api/usuario/login",REFRESH, Usuario.authenticate);
+routes.post("/api/usuario/recuperar_senha", Usuario.recoverPassword);
+routes.post("/api/usuario/redefinir_renha",RECOVERY, Usuario.redefinePassword);
+routes.get("/api/usuario/all", Usuario.findAllWithoutPagination);
+routes.get("/api/usuario/email", Usuario.findByEmail);
+routes.get("/api/usuario/:id",AUTH, Usuario.findOne);
+routes.get("/api/usuario", Usuario.findAll);
+routes.put("/api/usuario/:id",AUTH, Usuario.refresh);
+routes.delete("/api/usuario/:id", Usuario.delete);
+routes.delete("/api/usuario/parcialmente/:id", Usuario.partialDelete);
 
 
 module.exports = routes;

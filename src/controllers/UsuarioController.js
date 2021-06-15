@@ -8,7 +8,7 @@ const mailer= require('../utils/Mailer');
 const {cpf} = require('cpf-cnpj-validator');
 
 
-exports.cadastrarSemLogin = async (request, response, next) => {
+exports.registerWithoutLogin = async (request, response, next) => {
 	const credenciais = request.body;
     //Verifica se os dados de cadastro estão completos
 	if (!credenciais || !credenciais.name || !credenciais.email || !credenciais.password)
@@ -29,7 +29,7 @@ exports.cadastrarSemLogin = async (request, response, next) => {
 	}
 };
 //Adiciona uma nova instancia da entidade.
-exports.cadastrar = async (request, response, next) => {
+exports.register = async (request, response, next) => {
 	const credenciais = request.body;
     //Verifica se os dados de cadastro estão completos
 	if (!credenciais || !credenciais.nome || !credenciais.email || !credenciais.password)
@@ -67,7 +67,7 @@ exports.cadastrar = async (request, response, next) => {
 };
 
 //Realiza o autencicação do usuário, fornecendo-lhe o token caso seja um usuário autêntico.
-exports.autenticar = async (request, response, next) => {
+exports.authenticate = async (request, response, next) => {
     const { email, password } = request.body;
     let credenciais;
 	try {
@@ -110,7 +110,7 @@ exports.autenticar = async (request, response, next) => {
 };
 
 //Busca por uma instancia da entidade.
-exports.buscarUm = async (request, response, next) => {
+exports.findOne = async (request, response, next) => {
     //Essa comparação é que caso seja um usuario ele pode buscar só por ele mesmo e nao outros usuarios do sistema
 
     if(request.administrador_id != request.params.id && !request.is_administrador){
@@ -127,7 +127,7 @@ exports.buscarUm = async (request, response, next) => {
 	}
 };
 //Busca por uma instancia da entidade.
-exports.buscarPeloEmail = async (request, response, next) => {
+exports.findByEmail = async (request, response, next) => {
 
 	try {
 
@@ -142,7 +142,7 @@ exports.buscarPeloEmail = async (request, response, next) => {
 
 
 //Verifica se o token é do usuario que está logado no banco
-exports.verificaToken = async (token,id) => {
+exports.verifyToken = async (token,id) => {
 
 	try {
 		let result  = await DAO.verificaToken(token, id);
@@ -158,7 +158,7 @@ exports.verificaToken = async (token,id) => {
 
 
 //Busca todas as instancias da entidade.
-exports.buscarTudo = async (request, response, next) => {
+exports.findAll = async (request, response, next) => {
 	let { limite, pagina } = request.query;
 
 	try {
@@ -171,7 +171,7 @@ exports.buscarTudo = async (request, response, next) => {
 };
 
 //Busca todas as instancias da entidade sem paginação.
-exports.buscarTudoSemPaginacao = async (request, response, next) => {
+exports.findAllWithoutPagination = async (request, response, next) => {
 	try {
 
 		const instancias = await DAO.buscarTudoSemPaginacao();
@@ -183,7 +183,7 @@ exports.buscarTudoSemPaginacao = async (request, response, next) => {
 };
 
 //Atualiza uma instancia da entidade.
-exports.atualizar = async (request, response, next) => {
+exports.refresh = async (request, response, next) => {
 	const credenciais = request.body;
     let usuario;
     
@@ -211,7 +211,7 @@ exports.atualizar = async (request, response, next) => {
 };
 
 //Exclui uma instancia da entidade.
-exports.excluir = async (request, response, next) => {
+exports.delete = async (request, response, next) => {
 	try {
 
 		const deleted_id = await DAO.excluir(request.params.id)
@@ -222,7 +222,7 @@ exports.excluir = async (request, response, next) => {
 	}
 };
 //Apagar apenas alguns campos.
-exports.excluirParcialmente = async (request, response, next) => {
+exports.partialDelete = async (request, response, next) => {
 	try {
 
 		const deleted_id = await DAO.excluirParcialmente(request.params.id)
@@ -235,7 +235,7 @@ exports.excluirParcialmente = async (request, response, next) => {
 
 
 //Dado um e-mail existente no sistema, retorna um token de recuperação de password
-exports.recuperarSenha =  (request, response, next) => {
+exports.recoverPassword =  (request, response, next) => {
     const { email } = request.body;
 
     try {
@@ -306,7 +306,7 @@ exports.recuperarSenha =  (request, response, next) => {
  
 
 //Verifica se o token de recuperação pertence ao usuário e se ele é válido. Caso seja, realiza a troca da password.
-exports.redefinirSenha = (request, response, next) => {
+exports.redefinePassword = (request, response, next) => {
     const { email, password } = request.body;
     try {
         DAO.buscarPeloEmail(email).then(async (usuario) => {
