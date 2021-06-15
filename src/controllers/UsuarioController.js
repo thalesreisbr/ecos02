@@ -249,13 +249,13 @@ exports.recuperarSenha =  (request, response, next) => {
 
                 // Está validação tem o objetivo de que o usuario não fique mandando varios email caso o token dele ainda esteja válida
                 // 
-                let is_valid_created_a_new_token =false;
+                let is_valid_created_a_new_token =true;
                 if(token_antigo){
                     try{
                         await JWT.verify(token_antigo, privateKey, { algorithms: ['ES256'] });
                         is_valid_created_a_new_token = false;
                     }catch(err){
-                        is_valid_created_a_new_token = true;
+                        is_valid_created_a_new_token = false;
                     }
                     
                         

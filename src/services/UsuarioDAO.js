@@ -17,7 +17,6 @@ exports.cadastrar = async (credenciais) => {
 	}
 };
 
-//Busca por uma instancia da entidade.
 exports.buscarCredenciais = async (email) => {
 	try {
 
