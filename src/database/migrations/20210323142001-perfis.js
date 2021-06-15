@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('perfis', [
+    return queryInterface.bulkInsert('Perfis', [
       {
         id:1,
         active:true,
@@ -18,6 +18,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('perfis', null, {});
+    return queryInterface.bulkDelete('Perfis', null, {});
   }
 };

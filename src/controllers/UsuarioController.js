@@ -17,7 +17,7 @@ exports.cadastrarSemLogin = async (request, response, next) => {
         return response.status(status.CONFLICT).send({msg: 'Email já existente.'});
     }
     const salt = await bcrypt.genSalt();
-    credenciais.senha = await bcrypt.hash(credenciais.senha, salt);
+    credenciais.password = await bcrypt.hash(credenciais.password, salt);
 
 	try {
 
@@ -32,7 +32,7 @@ exports.cadastrarSemLogin = async (request, response, next) => {
 exports.cadastrar = async (request, response, next) => {
 	const credenciais = request.body;
     //Verifica se os dados de cadastro estão completos
-	if (!credenciais || !credenciais.nome || !credenciais.email || !credenciais.senha)
+	if (!credenciais || !credenciais.nome || !credenciais.email || !credenciais.password)
         return response.status(status.BAD_REQUEST).send({msg: 'Dados insuficientes.'});
 
     if(await DAO.buscarPeloEmail(credenciais.email)){
@@ -40,7 +40,7 @@ exports.cadastrar = async (request, response, next) => {
     }
     
     const salt = await bcrypt.genSalt();
-    credenciais.senha = await bcrypt.hash(credenciais.senha, salt);
+    credenciais.password = await bcrypt.hash(credenciais.password, salt);
 
 	try {
 
@@ -68,7 +68,7 @@ exports.cadastrar = async (request, response, next) => {
 
 //Realiza o autencicação do usuário, fornecendo-lhe o token caso seja um usuário autêntico.
 exports.autenticar = async (request, response, next) => {
-    const { email, senha } = request.body;
+    const { email, password } = request.body;
     let credenciais;
 	try {
         
@@ -76,8 +76,8 @@ exports.autenticar = async (request, response, next) => {
         credenciais = await DAO.buscarCredenciais(email);
         if(!credenciais) return response.status(status.NOT_FOUND).send({ msg: 'Credenciais incorretas.' }); 
 
-        //Compara a senha preenchidas com a senha cadastrada
-        const isValid = await bcrypt.compare(senha, credenciais.senha);
+        //Compara a password preenchidas com a password cadastrada
+        const isValid = await bcrypt.compare(password, credenciais.password);
         if(!isValid) return response.status(status.NOT_FOUND).send({ msg: 'Credenciais incorretas...' });
     
 
@@ -193,8 +193,8 @@ exports.atualizar = async (request, response, next) => {
     if(request.administrador_id != request.params.id && !request.is_administrador){
         return response.status(status.BAD_REQUEST).send({msg: 'Usuário só pode pesquisar ele mesmo'});
     }
-    if(request.body.senha){
-        return response.status(status.BAD_REQUEST).send({msg: 'Não é permetido atualizar a senha por aqui'});
+    if(request.body.password){
+        return response.status(status.BAD_REQUEST).send({msg: 'Não é permetido atualizar a password por aqui'});
     }
     try {
         
@@ -234,7 +234,7 @@ exports.excluirParcialmente = async (request, response, next) => {
 };
 
 
-//Dado um e-mail existente no sistema, retorna um token de recuperação de senha
+//Dado um e-mail existente no sistema, retorna um token de recuperação de password
 exports.recuperarSenha =  (request, response, next) => {
     const { email } = request.body;
 
@@ -279,11 +279,11 @@ exports.recuperarSenha =  (request, response, next) => {
                     await DAO.atualizarTokenRecuperacao(usuario.id,recoveryToken);
     
     
-                    //E-mail para redefinição de senha
+                    //E-mail para redefinição de password
                     mailer.sendMail({
                         to: email,
                         from: ' ',
-                        subject: 'Vixting - Redefinição de senha',
+                        subject: 'Vixting - Redefinição de password',
                         template: 'recuperacaoSenhaUsuario',
                         context: { recoveryToken, nome },
                     }, (error) => {
@@ -300,25 +300,25 @@ exports.recuperarSenha =  (request, response, next) => {
             })
             .catch((error) => next(error));
     } catch (error) {
-        response.status(status.BAD_REQUEST).send({ error: 'Erro ao recuperar senha. Por favor, tente novamente.' })
+        response.status(status.BAD_REQUEST).send({ error: 'Erro ao recuperar password. Por favor, tente novamente.' })
     }
 }
  
 
-//Verifica se o token de recuperação pertence ao usuário e se ele é válido. Caso seja, realiza a troca da senha.
+//Verifica se o token de recuperação pertence ao usuário e se ele é válido. Caso seja, realiza a troca da password.
 exports.redefinirSenha = (request, response, next) => {
-    const { email, senha } = request.body;
+    const { email, password } = request.body;
     try {
         DAO.buscarPeloEmail(email).then(async (usuario) => {
             if (!usuario)
                return response.status(status.NOT_FOUND).send({ error: 'Usuário não encontrado.' });
-            if(usuario.token_recuperacao == ""){
-                return response.status(status.UNAUTHORIZED).send({ msg: 'A senha já foi alterada uma vez, emita um novo token para senhar ser alterada'});
+            if(usuario.token_recovery == ""){
+                return response.status(status.UNAUTHORIZED).send({ msg: 'A password já foi alterada uma vez, emita um novo token para senhar ser alterada'});
             }      
             try {
                 const salt = await bcrypt.genSalt();
                 
-                DAO.atualizarSenha(usuario.id,await bcrypt.hash(senha, salt))
+                DAO.atualizarSenha(usuario.id,await bcrypt.hash(password, salt))
                     .then(() => {
 
                         //E-mail para aviso de seja redefinida

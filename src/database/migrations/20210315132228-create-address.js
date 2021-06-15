@@ -2,48 +2,32 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return  queryInterface.createTable('address',{
+    return  queryInterface.createTable('Address',{
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      cep: {
+      zipcode: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      uf: {
+      country: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cidade: {
+      street: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      bairro: {
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      endereco: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      numero:{
+      number:{
         type: Sequelize.INTEGER,
         allowNull:false
-      },
-      nome_destinatario:{
-        type: Sequelize.STRING,
-        allowNull:true
-      },
-      telefone_destinatario:{
-        type: Sequelize.STRING,
-        allowNull:true
-      },
-      complemento: {
-        type: Sequelize.STRING,
-        allowNull: true,
       },
       created_at: {
         allowNull: false,
@@ -59,7 +43,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('address');
+    return queryInterface.dropTable('Address');
   }
 };
 

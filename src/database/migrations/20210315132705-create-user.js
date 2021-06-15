@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('user', {
+    return queryInterface.createTable('User', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -38,21 +38,21 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      token_recuperacao: {
+      token_recovery: {
         allowNull: true,
         type: Sequelize.STRING,
       },
       perfil_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'perfis', key: 'id' },
+        references: { model: 'Perfis', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       address_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        references: { model: 'address', key: 'id' },
+        references: { model: 'Address', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
@@ -75,7 +75,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('user');
+    return queryInterface.dropTable('User');
 
   }
 };

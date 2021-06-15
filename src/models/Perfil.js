@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 
 
-class Address extends Model {
+class Perfil extends Model {
   static init(sequelize) {
     super.init({
         active: DataTypes.BOOLEAN,
@@ -15,4 +15,4 @@ class Address extends Model {
     
   }
 }
-module.exports = Address;
+module.exports = Perfil;

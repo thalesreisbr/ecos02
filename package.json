@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "test": "sequelize-auto -o ./src/models -d gizeleMonteiro -h localhost -u postgres -p 5432 -x postgres -e postgres",
     "db": "sequelize db:migrate:undo:all;sequelize db:migrate;sequelize db:seed:all"
   },
   "keywords": [],

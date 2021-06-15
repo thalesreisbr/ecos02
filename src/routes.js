@@ -7,8 +7,6 @@ const Usuario = require('./controllers/UsuarioController');
 const Perfil = require('./controllers/PerfilController');
 const Status = require('./controllers/StatusController');;
 
-
-
 //Rotas para o controlador exemplo
 routes.post("/api/ex", Exemplo.adicionar);
 routes.get("/api/ex/:id", Exemplo.buscarUm);

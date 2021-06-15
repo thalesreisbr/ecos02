@@ -8,7 +8,10 @@ class User extends Model{
             password: DataTypes.STRING,
             document: DataTypes.STRING,
             gender: DataTypes.STRING,
+            perfil_id:DataTypes.INTEGER,
             birth_date : DataTypes.DATE,
+            token: DataTypes.STRING,
+            token_recovery: DataTypes.STRING,
         },{
             sequelize
         });
