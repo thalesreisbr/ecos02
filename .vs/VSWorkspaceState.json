@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\controllers",
+    "\\src\\database",
+    "\\src\\middlewares",
+    "\\src\\models",
+    "\\src\\resources\\templates",
+    "\\src\\resources\\templates\\mails",
+    "\\src\\services"
+  ],
+  "SelectedNode": "\\src\\middlewares\\AccessLog.js",
+  "PreviewInSolutionExplorer": false
+}
