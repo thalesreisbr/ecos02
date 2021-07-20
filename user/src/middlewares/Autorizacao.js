@@ -35,13 +35,11 @@ exports.AUTH = async (request, response, next) => {
         responseBody.is_administrador = decoded.is_administrador;
         responseBody.perfil_id = decoded.perfil_id;
         
-        console.log("aqui");
         //Para usuario alem de o token ser valido no jwt ele também tem que estar no banco popis só pode ter um token(usuario logado) por cada usuario
         if(!decoded.is_administrador){
             if(!(await UsuarioController.verifyToken(token, decoded.administrador_id)))
                 return response.status(status.UNAUTHORIZED).send({ msg: 'Token Invalido, outra pessoa logou nessa conta'});
         }
-        console.log("teste");
         return response.status(200).send({"payload": responseBody, msg:"Usuario Autorizado"});
     } catch (error) {
         return response.status(status.UNAUTHORIZED).send({ msg: 'Token Invalido!', error });
@@ -57,7 +55,7 @@ exports.ADM = async (request, response, next) => {
 
     const parts = auth.split(' ');
 
-    //Verifica se o token possui duas partes
+    //Verifica se o token possui duas partes  
     if (!parts.length === 2)
         return response.status(status.UNAUTHORIZED).send({ erro: 'Token quebrado.' });
 

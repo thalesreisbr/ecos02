@@ -24,7 +24,7 @@ exports.buscarUm = async (id) => {
 	try {
 
 		const instancia = await entity.findByPk(id,{
-			include:{model:imagensEntity}
+			include:{model:imagensEntity, as:"imagens"}
 		});
 		return (instancia ? instancia : null);
 
@@ -48,7 +48,7 @@ exports.buscarTudo = async (limite, pagina) => {
 
 	try {
 
-		const instancias = await entity.findAll({include:{model:imagensEntity}, limit: limite, offset: offset });
+		const instancias = await entity.findAll({include:{model:imagensEntity, as:"imagens"}, limit: limite, offset: offset });
 		const total = await entity.count({});
 		
 		const totalPaginas = total > limite ? parseInt(total / limite) : 1;	

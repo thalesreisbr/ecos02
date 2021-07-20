@@ -1,6 +1,6 @@
 const express = require('express');
 const routes = express.Router();
-const {ACCESS_TOKEN} = require('./middlewares/ApiHotmartAutorizacao');
+const { AUTH }  =  require('./middlewares/Autorizacao');
 const {UPLOAD} = require('./middlewares/UploadFiles');
 const curso = require('./controllers/cursoController');;
 const Exposicao = require('./controllers/ExposicaoController');
@@ -11,10 +11,10 @@ const Aula = require('./controllers/AulaController');
 
 // ROtas para controlador produtoDigital
 // routes.post("/api/produtoDigital",AUTH,ADM, produtoDigital.adicionar);
-routes.post('/api/curso', curso.adicionar);
+routes.post('/api/curso', AUTH,curso.adicionar);
+routes.get('/api/curso', curso.buscarTudo);
 routes.get('/api/curso/sem_paginacao', curso.buscarTudoSemPaginacao);
 routes.get('/api/curso/:id', curso.buscarUm);
-routes.get('/api/curso', curso.buscarTudo);
 routes.put('/api/curso/:id', curso.atualizar);
 routes.delete('/api/curso/:id', curso.excluir);
 

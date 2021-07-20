@@ -14,15 +14,10 @@ const Pedido = require('./controllers/PedidoController');
 const Status = require('./controllers/StatusController');;
 
 
-//ROtas para controlador produtoDigital
-//routes.post("/api/produtoDigital",, produtoDigital.adicionar);
-routes.post("/api/produto_digital", produto_digital.adicionar);
+
+routes.get("/api/produto_digital", produto_digital.buscarTudo);
 routes.get("/api/produto_digital/sem_paginacao", produto_digital.buscarTudoSemPaginacao);
 routes.get("/api/produto_digital/:id", produto_digital.buscarUm);
-routes.get("/api/produto_digital", produto_digital.buscarTudo);
-routes.put("/api/produto_digital/:id", produto_digital.atualizar);
-routes.delete("/api/produto_digital/:id", produto_digital.excluir);
-
 
 
 //ROtas para controlador produtoDigital

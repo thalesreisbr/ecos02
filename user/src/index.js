@@ -11,7 +11,7 @@ database.sync({ /* force: true */})
         const server = http.createServer(app);
         server.listen(port, () => {
             console.log(`\n============ ${date()} ${time()} ============`);
-            console.log(`API Executando em: http://${database.config.host}:${port}/`);
+            console.log(`API User Executando em: http://${database.config.host}:${port}/`);
             console.log(`=============================================\n`);
         });
     })
