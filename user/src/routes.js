@@ -7,13 +7,18 @@ const Usuario = require('./controllers/UsuarioController');
 const Perfil = require('./controllers/PerfilController');
 const Status = require('./controllers/StatusController');;
 
-//Rotas para o controlador exemplo
-routes.post("/api/ex", Exemplo.add);
-routes.get("/api/ex/:id", Exemplo.findOne);
-routes.get("/api/ex", Exemplo.findAll);
-routes.get("/api/ex", Exemplo.findAllWithoutPagination);
-routes.put("/api/ex/:id", Exemplo.refresh);
-routes.delete("/api/ex/:id", Exemplo.delete);
+
+
+routes.get("/api/auth", AUTH);
+routes.get("/api/auth/adm",)
+
+// //Rotas para o controlador exemplo
+// routes.post("/api/ex", Exemplo.add);
+// routes.get("/api/ex/:id", Exemplo.findOne);
+// routes.get("/api/ex", Exemplo.findAll);
+// routes.get("/api/ex", Exemplo.findAllWithoutPagination);
+// routes.put("/api/ex/:id", Exemplo.refresh);
+// routes.delete("/api/ex/:id", Exemplo.delete);
 
 routes.get("/api/perfil/:id", Perfil.findOne);
 routes.get("/api/perfil", Perfil.findAllWithoutPagination);

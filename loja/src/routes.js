@@ -4,6 +4,7 @@
  */
 const express = require("express");
 const routes = express.Router();
+const { AUTH }  =  require('./middlewares/Autorizacao');
 const { UPLOAD } = require('./middlewares/UploadFiles');
 const produto_digital = require('./controllers/ProdutoDigitalController');
 const produto_fisico = require('./controllers/ProdutoFisicoController');
@@ -35,7 +36,7 @@ routes.patch("/api/exposicao/:id/imagem_destaque/:imgId", Exposicao.alterarImage
 routes.delete("/api/exposicao/:id", Exposicao.excluir);
 
 //ROtas para controlador Produto
-routes.post("/api/produto_fisico", produto_fisico.adicionar);
+routes.post("/api/produto_fisico", AUTH, produto_fisico.adicionar);
 routes.get("/api/produto_fisico/sem_paginacao", produto_fisico.buscarTudoSemPaginacao);
 routes.get("/api/produto_fisico/:id", produto_fisico.buscarUm);
 routes.get("/api/produto_fisico", produto_fisico.buscarTudo);

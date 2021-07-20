@@ -31,7 +31,8 @@ exports.UPLOAD = multer({
             'image/jpeg',
             'image/pjpeg',
             'image/png',
-            'image/gif'
+            'image/gif',
+            'image/mp4'
         ];
         if(allowedMimes.includes(file.mimetype)){
             cb(null, true);

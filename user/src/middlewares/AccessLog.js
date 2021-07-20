@@ -1,9 +1,3 @@
-/* Middleware <Access> 
- * B2ML Sistemas
- * Dev:  
- * Desc.: Middleware que intercepta todas as requisições e printa os dados dela no console
- */
-
 const { date, time } = require('../utils/DataHoraAtual.js')
 
 module.exports = {
